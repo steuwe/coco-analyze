@@ -627,6 +627,7 @@ class Params:
         self.gtIgnoreIds = set()
 
     def __init__(self, iouType='segm'):
+        print(iouType)
         if iouType == 'segm' or iouType == 'bbox':
             self.setDetParams()
         elif iouType == 'keypoints':
