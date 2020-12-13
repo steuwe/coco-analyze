@@ -448,13 +448,16 @@ class COCOanalyze:
         for aind, areaRngLbl in enumerate(self.params.areaRngLbl):
             evalImgsArea = [e for e in filter(None,evalImgs) if
                             e['aRng']==self.params.areaRng[aind]]
-
             max_oks = {};
             for e in evalImgsArea:
                 dtIds       = e['dtIds']
                 dtScoresMax = e['dtIousMax']
                 for i,j in zip(dtIds,dtScoresMax):
                     max_oks[i] = j
+            print('length max_oks: ' + str(len(max_oks)))
+            print('evalImgsArea: ' + str(len(evalImgsArea)))
+            print('evalImgsArea: ' + str(evalImgsArea[0:2]))
+            print('self._dts: ' + str(self._dts))
             # if assertion fails not all the detections have been evaluated
             assert(len(max_oks) == len(self._dts))
 
