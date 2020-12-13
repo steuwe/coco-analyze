@@ -457,7 +457,7 @@ class COCOanalyze:
             print('length max_oks: ' + str(len(max_oks)))
             print('evalImgsArea: ' + str(len(evalImgsArea)))
             print('evalImgsArea: ' + str(evalImgsArea[0:2]))
-            print('self._dts: ' + str(self._dts))
+            print('self._dts: ' + str(len(self._dts)))
             # if assertion fails not all the detections have been evaluated
             assert(len(max_oks) == len(self._dts))
 
