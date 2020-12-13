@@ -213,7 +213,7 @@ class COCOeval:
         if len(gts) == 0 or len(dts) == 0:
             return []
         ious = np.zeros((len(dts), len(gts)))
-        sigmas = np.array([.26, .25, .25, .35, .35, .79, .79, .72, .72, .62,.62, 1.07, 1.07, .87, .87, .89, .89])/10.0
+        sigmas = np.array([.025, .025, .1, .1, .08, .08, .1, .1, .1, .1, .1, .075, .075, .075, .075, .06, .06, .06, .06, .06])
         vars = (sigmas * 2)**2
         k = len(sigmas)
 
