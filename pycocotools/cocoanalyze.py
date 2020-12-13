@@ -925,20 +925,22 @@ class Params:
         self.imgIds = []
         self.catIds = []
         self.kpts_name     = \
-            [u'nose',u'left_eye', u'right_eye',u'left_ear', u'right_ear',
-             u'left_shoulder', u'right_shoulder', u'left_elbow', u'right_elbow',
-             u'left_wrist', u'right_wrist', u'left_hip', u'right_hip',
-             u'left_knee', u'right_knee', u'left_ankle', u'right_ankle']
+            ["left_eye", "right_eye", "throat", "nose", 
+             "withers", "left_ear", "right_ear", "tail", 
+             "front_left_elbow", "front_right_elbow", "back_left_elbow", "back_right_elbow", 
+             "front_left_knee", "front_right_knee", "back_left_knee", "back_right_knee", 
+             "front_left_paw", "front_right_paw", "back_left_paw", "back_right_paw"]
         self.inv_kpts_name = \
-            [u'nose', u'right_eye', u'left_eye', u'right_ear', u'left_ear',
-             u'right_shoulder', u'left_shoulder', u'right_elbow', u'left_elbow',
-             u'right_wrist', u'left_wrist', u'right_hip', u'left_hip',
-             u'right_knee', u'left_knee', u'right_ankle', u'left_ankle']
+            ["right_eye", "left_eye", "throat", "nose", 
+             "withers", "right_ear", "left_ear", "tail", 
+             "front_right_elbow", "front_left_elbow", "back_right_elbow", "back_left_elbow", 
+             "front_right_knee", "front_left_knee", "back_right_knee", "back_left_knee", 
+             "front_right_paw", "front_left_paw", "back_right_paw", "back_left_paw"]
         self.num_kpts = len(self.kpts_name)
         self.inv_idx  = [self.inv_kpts_name.index(self.kpts_name[i]) for i in range(self.num_kpts)]
-        self.sigmas   = np.array([.026,.025,.025, .035,.035, .079,.079, .072,.072,
-                                     .062,.062, .107,.107, .087,.087, .089,.089])
+        self.sigmas = np.array([.025, .025, .1, .1, .08, .08, .1, .1, .1, .1, .1, .075, .075, .075, .075, .06, .06, .06, .06, .06])
         self.oksThrs  = np.array([.5 ,.55, .6, .65, .7, .75, .8, .85, .9, .95])
+
         # the threshold that determines the limit for localization error
         self.oksLocThrs = .1
         # oks thresholds that define a jitter error
