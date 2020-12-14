@@ -452,10 +452,12 @@ class COCOanalyze:
             for e in evalImgsArea:
                 dtIds       = e['dtIds']
                 dtScoresMax = e['dtIousMax']
+                print('Length of dtIds: ' + str(len(dtIds)))
+                print('Length of dtScoresMax: ' + str(len(dtScoresMax)))
                 for i,j in zip(dtIds,dtScoresMax):
                     max_oks[i] = j
             # if assertion fails not all the detections have been evaluated
-            # assert(len(max_oks) == len(self._dts))
+            assert(len(max_oks) == len(self._dts))
 
             # do soft non max suppression
             _soft_nms_dts = self._soft_nms(max_oks)
