@@ -449,6 +449,8 @@ class COCOanalyze:
             evalImgsArea = [e for e in filter(None,evalImgs) if
                             e['aRng']==self.params.areaRng[aind]]
             max_oks = {};
+            print('length of evalImgs:')
+            print(len(evalImgs))
             for e in evalImgsArea:
                 dtIds       = e['dtIds']
                 dtScoresMax = e['dtIousMax']
@@ -716,12 +718,6 @@ class COCOanalyze:
                                 break
                 self.cocoEval.evaluate()
                 self.cocoEval.accumulate()
-                myvar = self.cocoEval.eval['precision'][::-1,:,:,0,:]
-                myvar2 = self.cocoEval.eval['precision']
-                print(myvar[0])
-                print('complete: ' + str(myvar))
-                print(myvar2[0])
-                print('complete: ' + str(myvar2))
                 ps_mat_kpts[tind_start:tind_end,:,:,aind,:] = self.cocoEval.eval['precision'][::-1,:,:,0,:]
                 rs_mat_kpts[tind_start:tind_end,:,aind,:]   = self.cocoEval.eval['recall'][::-1,:,0,:]
         return ps_mat_kpts, rs_mat_kpts
@@ -950,7 +946,7 @@ class Params:
         self.oksLocThrs = .1
         # oks thresholds that define a jitter error
         self.jitterKsThrs = [.5,.85]
-        self.maxDets      = [100]
+        self.maxDets      = [20]
         self.teamMaxDets  = []
         self.areaRng      = [[32 ** 2, 1e5 ** 2],[32 ** 2, 96 ** 2],[96 ** 2, 1e5 ** 2]]
         self.areaRngLbl   = ['all','medium','large']
