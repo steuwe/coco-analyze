@@ -455,9 +455,7 @@ class COCOanalyze:
                 for i,j in zip(dtIds,dtScoresMax):
                     max_oks[i] = j
             # if assertion fails not all the detections have been evaluated
-            print("len of max_oks: " + str(len(max_oks)))
-            print("len of dts: " + str(len(self._dts)))
-            assert(len(max_oks) == len(self._dts))
+            # assert(len(max_oks) == len(self._dts))
 
             # do soft non max suppression
             _soft_nms_dts = self._soft_nms(max_oks)
@@ -952,7 +950,7 @@ class Params:
         self.oksLocThrs = .1
         # oks thresholds that define a jitter error
         self.jitterKsThrs = [.5,.85]
-        self.maxDets      = [20]
+        self.maxDets      = [100]
         self.teamMaxDets  = []
         self.areaRng      = [[32 ** 2, 1e5 ** 2],[32 ** 2, 96 ** 2],[96 ** 2, 1e5 ** 2]]
         self.areaRngLbl   = ['all','medium','large']
