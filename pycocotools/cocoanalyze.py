@@ -719,7 +719,12 @@ class COCOanalyze:
                                 break
                 self.cocoEval.evaluate()
                 self.cocoEval.accumulate()
-
+                myvar = self.cocoEval.eval['precision'][::-1,:,:,0,:]
+                myvar2 = self.cocoEval.eval['precision']
+                print(myvar[0])
+                print('complete: ' + str(myvar))
+                print(myvar2[0])
+                print('complete: ' + str(myvar2))
                 ps_mat_kpts[tind_start:tind_end,:,:,aind,:] = self.cocoEval.eval['precision'][::-1,:,:,0,:]
                 rs_mat_kpts[tind_start:tind_end,:,aind,:]   = self.cocoEval.eval['recall'][::-1,:,0,:]
         return ps_mat_kpts, rs_mat_kpts
@@ -785,6 +790,7 @@ class COCOanalyze:
                             e['dtIgnore'][oind][dind] = True
                 # accumulate results after having set all this ignores
                 self.cocoEval.accumulate()
+
             ps_mat_false_pos[:,:,:,aind,:] = self.cocoEval.eval['precision'][::-1,:,:,0,:]
             rs_mat_false_pos[:,:,aind,:]   = self.cocoEval.eval['recall'][::-1,:,0,:]
 
