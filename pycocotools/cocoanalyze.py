@@ -438,7 +438,6 @@ class COCOanalyze:
                 self.cocoEval.params.areaRngLbl = [areaRngLbl]
                 self.cocoEval.evaluate(check_scores=True)
                 evalImgs.extend([e for e in filter(None,self.cocoEval.evalImgs)])
-                print("len of evalImgs: " + str(len(evalImgs)))
         else:
             # run the evaluation with check scores flag
             self.cocoEval.params.areaRng    = self.params.areaRng
@@ -675,7 +674,7 @@ class COCOanalyze:
         err_types = self.params.err_types
         assert(len(err_types)>0)
         T = len(oksThrs); E = len(self.params.err_types)
-        R = len(self.cocoEval.params.recThrs); K = 1
+        R = len(self.cocoEval.params.recThrs); K = len(self.cocoEval.params.catIds)
         A = len(self.params.areaRng); M = len(self.params.maxDets)
         ps_mat_kpts = np.zeros([T*E,R,K,A,M])
         rs_mat_kpts = np.zeros([T*E,K,A,M])
