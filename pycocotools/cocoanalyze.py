@@ -461,7 +461,7 @@ class COCOanalyze:
 
             # do soft non max suppression
             _soft_nms_dts = self._soft_nms(max_oks)
-            print('here')
+            print('soft_nms_dts: ' + str(_soft_nms_dts))
             for cdt in self.corrected_dts[areaRngLbl]:
                 print(cdt)
                 print(cdt['id'])
