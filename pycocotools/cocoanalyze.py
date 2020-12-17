@@ -449,8 +449,6 @@ class COCOanalyze:
             evalImgsArea = [e for e in filter(None,evalImgs) if
                             e['aRng']==self.params.areaRng[aind]]
             max_oks = {};
-            print('length of evalImgs:')
-            print(len(evalImgs))
             for e in evalImgsArea:
                 dtIds       = e['dtIds']
                 dtScoresMax = e['dtIousMax']
@@ -461,13 +459,11 @@ class COCOanalyze:
 
             # do soft non max suppression
             _soft_nms_dts = self._soft_nms(max_oks)
-            print('soft_nms_dts: ' + str(_soft_nms_dts))
             for cdt in self.corrected_dts[areaRngLbl]:
-                print(cdt)
-                print(cdt['id'])
-                d = _soft_nms_dts[cdt['id']]
-                cdt['opt_score'] = d['opt_score']
-                cdt['max_oks']   = d['max_oks']
+                if cdt['id'] in _soft_nms_dts:
+                    d = _soft_nms_dts[cdt['id']]
+                    cdt['opt_score'] = d['opt_score']
+                    cdt['max_oks']   = d['max_oks']
 
         toc = time.time()
         print('DONE (t={:0.2f}s).'.format(toc-tic))
