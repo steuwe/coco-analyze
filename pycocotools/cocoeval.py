@@ -245,6 +245,8 @@ class COCOeval:
         return ious
 
     def evaluateImg(self, imgId, catId, aRng, maxDet, check_scores):
+        print('catIds: ' + str(pcatIds))
+        print('catId: ' + str(catId))
         '''
         perform evaluation for single category and image
         :return: dict (single image results)
