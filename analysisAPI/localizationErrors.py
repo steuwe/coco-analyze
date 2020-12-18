@@ -94,6 +94,9 @@ def localizationErrors( coco_analyze, imgs_info, saveDir ):
     rects_d['front_left_knee']      = .48,.5, .1, .1;  rects_d['front_right_knee']      = .39,.5, .1, .1
     rects_d['back_left_knee']     = .55,.32,.1, .1;  rects_d['back_right_knee']     = .4, .32,.1, .1
     rects_d['back_left_paw']    = .55,.15,.1, .1;  rects_d['back_right_paw']    = .4, .15,.1, .1
+    rects_d['withers']    = .35,.15,.1, .1;  rects_d['tail']    = .4, .64,.1, .1
+    rects_d['throat']    = .34, .64,.1, .1
+
     order = ["left_eye", "right_eye", "throat", "nose", 
              "withers", "left_ear", "right_ear", "tail", 
              "front_left_elbow", "front_right_elbow", "back_left_elbow", "back_right_elbow", 
