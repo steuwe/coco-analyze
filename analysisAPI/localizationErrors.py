@@ -31,9 +31,9 @@ def localizationErrors( coco_analyze, imgs_info, saveDir ):
     f.write("Number matches:    [%d]\n\n"%len(matched_dts))
 
     good = 0; jitter = 0; inversion = 0; swap = 0; miss = 0; tot = 0.
-    good_keypoints = np.zeros(17)
-    jitt_keypoints = np.zeros(17); inv_keypoints  = np.zeros(17)
-    swap_keypoints = np.zeros(17); miss_keypoints = np.zeros(17)
+    good_keypoints = np.zeros(20)
+    jitt_keypoints = np.zeros(20); inv_keypoints  = np.zeros(20)
+    swap_keypoints = np.zeros(20); miss_keypoints = np.zeros(20)
 
     for dtm in matched_dts:
         match = dt_gt_matches[dtm['id']][0]
@@ -88,16 +88,17 @@ def localizationErrors( coco_analyze, imgs_info, saveDir ):
     rects_d['nose']          = .47,.75,.07,.07
     rects_d['left_eye']      = .5, .83,.07,.07; rects_d['right_eye']      = .44,.83,.07,.07
     rects_d['left_ear']      = .54,.77,.07,.07; rects_d['right_ear']      = .4, .77,.07,.07
-    rects_d['left_shoulder'] = .58,.68,.1, .1;  rects_d['right_shoulder'] = .32,.65,.1, .1
-    rects_d['left_elbow']    = .67,.6, .1, .1;  rects_d['right_elbow']    = .27,.52,.1, .1
-    rects_d['left_wrist']    = .59,.49,.1, .1;  rects_d['right_wrist']    = .34,.42,.1, .1
-    rects_d['left_hip']      = .48,.5, .1, .1;  rects_d['right_hip']      = .39,.5, .1, .1
-    rects_d['left_knee']     = .55,.32,.1, .1;  rects_d['right_knee']     = .4, .32,.1, .1
-    rects_d['left_ankle']    = .55,.15,.1, .1;  rects_d['right_ankle']    = .4, .15,.1, .1
-    order = ['nose','left_eye','right_eye','left_ear','right_ear',
-             'left_shoulder','right_shoulder','left_elbow','right_elbow',
-             'left_wrist','right_wrist','left_hip','right_hip',
-             'left_knee','right_knee','left_ankle','right_ankle']
+    rects_d['front_left_elbow'] = .58,.68,.1, .1;  rects_d['front_right_elbow'] = .32,.65,.1, .1
+    rects_d['back_left_elbow']    = .67,.6, .1, .1;  rects_d['back_right_elbow']    = .27,.52,.1, .1
+    rects_d['front_right_paw']    = .59,.49,.1, .1;  rects_d['front_left_paw']    = .34,.42,.1, .1
+    rects_d['front_left_knee']      = .48,.5, .1, .1;  rects_d['front_right_knee']      = .39,.5, .1, .1
+    rects_d['back_left_knee']     = .55,.32,.1, .1;  rects_d['back_right_knee']     = .4, .32,.1, .1
+    rects_d['back_left_paw']    = .55,.15,.1, .1;  rects_d['back_right_paw']    = .4, .15,.1, .1
+    order = ["left_eye", "right_eye", "throat", "nose", 
+             "withers", "left_ear", "right_ear", "tail", 
+             "front_left_elbow", "front_right_elbow", "back_left_elbow", "back_right_elbow", 
+             "front_left_knee", "front_right_knee", "back_left_knee", "back_right_knee", 
+             "front_left_paw", "front_right_paw", "back_left_paw", "back_right_paw"]
     COLORS = ['#8C4646','#D96459','#F2AE72','#F2E394']
 
     f.write("Per Keypoint breakdown: [jitter, inversion, swap, miss]\n")
@@ -123,8 +124,8 @@ def localizationErrors( coco_analyze, imgs_info, saveDir ):
     f.write(" - Swap:      %s\n"%swap_keypoints)
     f.write(" - Miss:      %s\n"%miss_keypoints)
 
-    KEYPOINTS_L = ['Nose','Eyes','Ears','Should.','Elbows','Wrists','Hips','Knees','Ankles']
-    KEYPOINTS_I = [[0],[1,2],[3,4],[5,6],[7,8],[9,10],[11,12],[13,14],[15,16]]
+    KEYPOINTS_L = ['Eyes','Throat','Nose', 'Withers', 'Ears', 'Tail', 'Front_elbows','Back_elbows','Front_knees', 'Back_knees', 'Front_paws', 'Back_paws']
+    KEYPOINTS_I = [[0, 1], [2],[3],[4],[5,6],[7,8],[9],[10,11],[12,13],[14,15],[16,17],[18,19]]
 
     ####################################
     err_vecs = [jitt_keypoints,inv_keypoints,swap_keypoints,miss_keypoints]
@@ -202,9 +203,9 @@ def localizationErrors( coco_analyze, imgs_info, saveDir ):
                     pass
                 else:
                     plt.plot(x[sk],y[sk], linewidth=3, color=utilities.colors[sk[0],sk[1]])
-
-            for kk in range(17):
-                if kk in [1,3,5,7,9,11,13,15]:
+            
+            for kk in range(20):
+                if kk in [0,5,7,10,12,14,16,18]:
                     if USE_VISIBILITY_FOR_PLOTS and v[kk] == 0:
                         # don't plot the keypoints if it has Visibilty flag == 0
                         # and USE_VISIBILITY_FOR_PLOTS == True
@@ -214,7 +215,7 @@ def localizationErrors( coco_analyze, imgs_info, saveDir ):
                         plt.plot(x[kk], y[kk],'o',markersize=5, markerfacecolor='r',
                                                       markeredgecolor='r', markeredgewidth=3)
 
-                elif kk in [2,4,6,8,10,12,14,16]:
+                elif kk in [1,6,8,11,13,15,17,19]:
                     if USE_VISIBILITY_FOR_PLOTS and v[kk] == 0:
                         # don't plot the keypoints if it has Visibilty flag == 0
                         # and USE_VISIBILITY_FOR_PLOTS == True
