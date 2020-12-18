@@ -173,7 +173,7 @@ def localizationErrors( coco_analyze, imgs_info, saveDir ):
             x = kp[0::3]; y = kp[1::3]; v = kp[2::3]
 
             # show the image
-            I = io.imread(imgs_info[t['image_id']]['coco_url'])
+            I = io.imread('/content/drive/My Drive/split_daten_valid/Images/' + str(imgs_info[t['image_id']]['file_name']))
             plt.figure(figsize=(10,10)); plt.axis('off')
             plt.imshow(I)
             ax = plt.gca()
