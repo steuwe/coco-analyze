@@ -725,7 +725,7 @@ class COCOanalyze:
         oksThrs = sorted(self.params.oksThrs)
         self.cocoEval.params.maxDets = self.params.maxDets
         self.cocoEval.params.iouThrs = oksThrs
-        T = len(oksThrs); R = len(self.cocoEval.params.recThrs); K = 1
+        T = len(oksThrs); R = len(self.cocoEval.params.recThrs); K = len(self.cocoEval.params.catIds);
         A = len(self.params.areaRng); M = len(self.params.maxDets)
         ps_mat_score = np.zeros([T,R,K,A,M])
         rs_mat_score = np.zeros([T,K,A,M])
@@ -753,7 +753,7 @@ class COCOanalyze:
         oksThrs = sorted(self.params.oksThrs)
         self.cocoEval.params.maxDets = self.params.maxDets
         self.cocoEval.params.iouThrs = oksThrs
-        T = len(oksThrs); R = len(self.cocoEval.params.recThrs); K = 1
+        T = len(oksThrs); R = len(self.cocoEval.params.recThrs); K = len(self.cocoEval.params.catIds);
         A = len(self.params.areaRng); M = len(self.params.maxDets)
         ps_mat_false_pos = np.zeros([T,R,K,A,M])
         rs_mat_false_pos = np.zeros([T,K,A,M])
