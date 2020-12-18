@@ -744,7 +744,7 @@ class COCOanalyze:
             self.cocoEval.accumulate()
 
             # insert results into the precision matrix
-            print('cocoeval: ' + str(cocoEval.eval['precision'][::-1,:,:,0,:])) 
+            print('cocoeval: ' + str(self.cocoEval.eval['precision'][::-1,:,:,0,:])) 
             ps_mat_score[:,:,:,aind,:] = self.cocoEval.eval['precision'][::-1,:,:,0,:]
             rs_mat_score[:,:,aind,:]   = self.cocoEval.eval['recall'][::-1,:,0,:]
         return ps_mat_score, rs_mat_score
