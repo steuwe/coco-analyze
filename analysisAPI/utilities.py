@@ -12,13 +12,13 @@ import skimage.io as io
 """
 Utility functions
 """
-num_kpts  = 17
+num_kpts  = 20
 oks       = [0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95]
 sqrt_neg_log_oks = np.sqrt(-2*np.log(oks))
-sigmas    = np.array([.26, .25, .25, .35, .35, .79, .79, .72, .72, .62,.62, 1.07, 1.07, .87, .87, .89, .89])/10.0
+sigmas = np.array([.025, .025, .1, .1, .08, .08, .1, .1, .1, .1, .1, .075, .075, .075, .075, .06, .06, .06, .06, .06])
 variances = (sigmas * 2)**2
-skeleton  = [[16, 14], [14, 12], [17, 15], [15, 13], [12, 13], [6, 12], [7, 13], [6, 7], [6, 8], [7, 9],
-            [8, 10], [9, 11], [2, 3], [1, 2], [1, 3], [2, 4], [3, 5], [4, 6], [5, 7]]
+
+skeleton  = [[0, 3], [1, 3], [3, 2], [0, 1], [5, 0], [6, 1], [2, 4], [4, 7], [7, 10], [7, 11], [8, 12], [9, 13], [12, 16], [13, 17], [10, 14], [11, 15], [14, 18], [15,19]]
 colors    = {(0,1): '#cd87ff', (0,2): '#cd87ff', (1,2): '#cd87ff', (1,3): '#cd87ff', (2,4): '#cd87ff',
             (3,5): '#74c8f9', (4,6): '#74c8f9', (5,6): '#feff95', (5,7): '#74c8f9', (5,11): '#feff95',
             (6,8): '#74c8f9', (6,12): '#feff95',(7,9): '#74c8f9', (8,10): '#74c8f9',(11,12): '#feff95',
@@ -72,12 +72,11 @@ def show_dets(coco_dts, coco_gts, img_info, save_path=None):
         x = kp[0::3]; y = kp[1::3]; v = kp[2::3]
         for sk in sks:
             plt.plot(x[sk],y[sk], linewidth=3, color=colors[sk[0],sk[1]])
-
-        for kk in range(17):
-            if kk in [1,3,5,7,9,11,13,15]:
+        for kk in range(20):
+            if kk in [0,5,8,10,12,14,16,18]:
                 plt.plot(x[kk], y[kk],'o',markersize=5, markerfacecolor='r',
                                               markeredgecolor='r', markeredgewidth=3)
-            elif kk in [2,4,6,8,10,12,14,16]:
+            elif kk in [1,6,9,11,13,15,17,19]:
                 plt.plot(x[kk], y[kk],'o',markersize=5, markerfacecolor='g',
                                               markeredgecolor='g', markeredgewidth=3)
             else:
