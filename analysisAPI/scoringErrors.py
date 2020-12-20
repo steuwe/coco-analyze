@@ -156,7 +156,7 @@ def scoringErrors( coco_analyze, oks, imgs_info, saveDir ):
     high_oks_dt_opt_score_hist = []; other_dt_opt_score_hist = []
 
     for ind, imgId in enumerate(all_dts.keys()):
-        dts   = [(d['id'],d['score'],d['opt_score']) for d in all_dts[imgId]['dts']]
+        dts   = [(d['id'],d['score'],d['opt_score']) for d in all_dts[imgId]['dts'] if 'opt_score' in d]
         gtIds = [g['id'] for g in all_gts[imgId]]
         if len(dts) * len(gtIds) == 0: continue
 
