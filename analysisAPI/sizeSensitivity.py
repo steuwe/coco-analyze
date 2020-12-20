@@ -43,10 +43,6 @@ def sizeSensitivity( coco_analyze, oks, saveDir ):
 
     f.write("Benchmark Dimensions:\n")
     for i,a in enumerate(areaRngs[:-1]):
-        print(i)
-        print(a)
-        print(areaRngLbls[i])
-        print(size_index)
         if areaRngLbls[i] in size_index:
             f.write("%d) %s-%s: %d\n"%(i,areaRngLbls[i],a,len(size_index[areaRngLbls[i]])))
         else:
