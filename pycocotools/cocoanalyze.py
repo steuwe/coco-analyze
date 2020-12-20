@@ -397,25 +397,26 @@ class COCOanalyze:
 
             # loop through all detections in the image and change only the
             # corresponsing detection cdt being analyzed
-            for d in self.cocoEval._dts[image_id, self.params.catIds[0]]:
-                if d['id'] == dtid:
-                    err_kpts_mask = np.zeros(len(cdt['good']))
-                    if 'miss' in self.params.err_types:
-                        err_kpts_mask += np.array(cdt['miss'])
+            for cat in range(len(self.params.catIds)):
+                for d in self.cocoEval._dts[image_id, self.params.catIds[cat]]:
+                    if d['id'] == dtid:
+                        err_kpts_mask = np.zeros(len(cdt['good']))
+                        if 'miss' in self.params.err_types:
+                            err_kpts_mask += np.array(cdt['miss'])
 
-                    if 'swap' in self.params.err_types:
-                        err_kpts_mask += np.array(cdt['swap'])
+                        if 'swap' in self.params.err_types:
+                            err_kpts_mask += np.array(cdt['swap'])
 
-                    if 'inversion' in self.params.err_types:
-                        err_kpts_mask += np.array(cdt['inversion'])
+                        if 'inversion' in self.params.err_types:
+                            err_kpts_mask += np.array(cdt['inversion'])
 
-                    if 'jitter' in self.params.err_types:
-                        err_kpts_mask += np.array(cdt['jitter'])
+                        if 'jitter' in self.params.err_types:
+                            err_kpts_mask += np.array(cdt['jitter'])
 
-                    d['keypoints'] = \
-                        cdt['opt_keypoints'] * (np.repeat(err_kpts_mask,3)==1) + \
-                        cdt['keypoints']     * (np.repeat(err_kpts_mask,3)==0)
-                    break
+                        d['keypoints'] = \
+                            cdt['opt_keypoints'] * (np.repeat(err_kpts_mask,3)==1) + \
+                            cdt['keypoints']     * (np.repeat(err_kpts_mask,3)==0)
+                        break
 
     def find_score_errors(self):
         tic = time.time()
@@ -517,10 +518,11 @@ class COCOanalyze:
             image_id = cdt['image_id']
             # loop through all detections in the image and change only the
             # corresponsing detection cdt being analyzed
-            for d in self.cocoEval._dts[image_id, self.params.catIds[0]]:
-                if d['id'] == dtid:
-                    d['score'] = cdt['opt_score']
-                    break
+            for cat in range(len(self.params.catIds)):
+                for d in self.cocoEval._dts[image_id, self.params.catIds[cat]]:
+                    if d['id'] == dtid:
+                        d['score'] = cdt['opt_score']
+                        break
 
     def find_bckgd_errors(self):
         tic = time.time()
@@ -702,20 +704,21 @@ class COCOanalyze:
                         image_id = cdt['image_id']
                         corrected_kpts = np.array(cdt['opt_keypoints'])
                         # correct only those keypoints
-                        for d in self.cocoEval._dts[image_id, self.params.catIds[0]]:
-                            if d['id'] == dtid:
-                                oth_kpts_mask = np.repeat(np.logical_not(cdt[err])*1,2)
-                                err_kpts_mask = np.repeat(cdt[err],2)
-                                all_kpts = np.delete(np.array(d['keypoints']), slice(2, None, 3))
-                                opt_kpts = np.delete(np.array(corrected_kpts), slice(2, None, 3))
+                        for cat in range(len(self.params.catIds)):
+                            for d in self.cocoEval._dts[image_id, self.params.catIds[cat]]:
+                                if d['id'] == dtid:
+                                    oth_kpts_mask = np.repeat(np.logical_not(cdt[err])*1,2)
+                                    err_kpts_mask = np.repeat(cdt[err],2)
+                                    all_kpts = np.delete(np.array(d['keypoints']), slice(2, None, 3))
+                                    opt_kpts = np.delete(np.array(corrected_kpts), slice(2, None, 3))
+ 
+                                    kpts = all_kpts * oth_kpts_mask + \
+                                           opt_kpts * err_kpts_mask
 
-                                kpts = all_kpts * oth_kpts_mask + \
-                                       opt_kpts * err_kpts_mask
-
-                                d['keypoints'] = np.array(d['keypoints'])
-                                d['keypoints'][indx_list] = kpts
-                                d['keypoints'] = d['keypoints'].tolist()
-                                break
+                                    d['keypoints'] = np.array(d['keypoints'])
+                                    d['keypoints'][indx_list] = kpts
+                                    d['keypoints'] = d['keypoints'].tolist()
+                                    break
                 self.cocoEval.evaluate()
                 self.cocoEval.accumulate()
                 ps_mat_kpts[tind_start:tind_end,:,:,aind,:] = self.cocoEval.eval['precision'][::-1,:,:,0,:]
