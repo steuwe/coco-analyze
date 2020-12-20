@@ -168,7 +168,7 @@ def localizationErrors( coco_analyze, imgs_info, saveDir ):
         top_err_dts = sorted(top_err_dts, key=lambda k: -sum(k[err]))
 
         for tind, t in enumerate(top_err_dts[0:7]):
-            sks = np.array(utilities.skeleton)-1
+            sks = np.array(utilities.skeleton)
             kp = np.array(t['keypoints'])
             x = kp[0::3]; y = kp[1::3]; v = kp[2::3]
 
