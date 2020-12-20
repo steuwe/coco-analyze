@@ -40,13 +40,17 @@ def sizeSensitivity( coco_analyze, oks, saveDir ):
 
         if areaRngs[3][0] < a['area'] <= areaRngs[3][1]:
             size_index.setdefault('xxlarge', []).append(a['id'])
-
+    if 'medium' not in size_index:
+        size_index['medium'] = []
+    if 'large' not in size_index:
+        size_index['large'] = []
+    if 'xlarge' not in size_index:
+        size_index['xlarge'] = []
+    if 'xxlarge' not in size_index:
+        size_index['xlarge'] = []
     f.write("Benchmark Dimensions:\n")
     for i,a in enumerate(areaRngs[:-1]):
-        if areaRngLbls[i] in size_index:
-            f.write("%d) %s-%s: %d\n"%(i,areaRngLbls[i],a,len(size_index[areaRngLbls[i]])))
-        else:
-            f.write("%d) %s-%s: %d\n"%(i,areaRngLbls[i],a,0))
+        f.write("%d) %s-%s: %d\n"%(i,areaRngLbls[i],a,len(size_index[areaRngLbls[i]])))
 
 
     fig, ax = plt.subplots(figsize=(6,6))
