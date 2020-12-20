@@ -276,7 +276,7 @@ class COCO:
                         ax.imshow(np.dstack( (img, m*0.5) ))
                 if 'keypoints' in ann and type(ann['keypoints']) == list:
                     # turn skeleton into zero-based index
-                    sks = np.array(self.loadCats(ann['category_id'])[0]['skeleton'])-1
+                    sks = np.array(self.loadCats(ann['category_id'])[0]['skeleton'])
                     kp = np.array(ann['keypoints'])
                     x = kp[0::3]
                     y = kp[1::3]
