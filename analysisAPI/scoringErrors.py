@@ -44,7 +44,7 @@ def scoringErrors( coco_analyze, oks, imgs_info, saveDir ):
         if imgId in all_dts:
             dts = all_dts[imgId]['dts']
             all_dts[imgId]['score'] = np.argsort([-d['score'] for d in dts], kind='mergesort')
-            all_dts[imgId]['opt_score'] = np.argsort([-d['opt_score'] for d in dts], kind='mergesort')
+            all_dts[imgId]['opt_score'] = np.argsort([-d['opt_score'] for d in dts if 'opt_score' in d], kind='mergesort')
 
             if list(all_dts[imgId]['score']) != list(all_dts[imgId]['opt_score']):
                 subopt_order_images.append(imgId)
