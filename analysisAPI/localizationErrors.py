@@ -208,9 +208,6 @@ def localizationErrors( coco_analyze, imgs_info, saveDir ):
                     # keypoints has Visibilty flag == 0 and USE_VISIBILITY_FOR_PLOTS == True
                     pass
                 else:
-                    print(x[sk])
-                    print(y[sk])
-                    print(utilities.colors[sk[0], sk[1]])
                     plt.plot(x[sk],y[sk], linewidth=3, color=utilities.colors[sk[0],sk[1]])
             
             for kk in range(20):
