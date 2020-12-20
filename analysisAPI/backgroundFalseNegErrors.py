@@ -130,6 +130,7 @@ def backgroundFalseNegErrors( coco_analyze, imgs_info, saveDir ):
             crowd += 1
 
         if b['iscrowd']==1: continue
+        if not b['image_id'] in imgs_info.values(): continue
         nx, ny = imgs_info[b['image_id']]['width'],imgs_info[b['image_id']]['height']
         the_mask = np.zeros((ny,nx))
 
