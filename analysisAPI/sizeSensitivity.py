@@ -47,7 +47,11 @@ def sizeSensitivity( coco_analyze, oks, saveDir ):
         print(a)
         print(areaRngLbls[i])
         print(size_index)
-        f.write("%d) %s-%s: %d\n"%(i,areaRngLbls[i],a,len(size_index[areaRngLbls[i]])))
+        if areaRngLbls[i] in size_index:
+            f.write("%d) %s-%s: %d\n"%(i,areaRngLbls[i],a,len(size_index[areaRngLbls[i]])))
+        else:
+            f.write("%d) %s-%s: %d\n"%(i,areaRngLbls[i],a,0))
+
 
     fig, ax = plt.subplots(figsize=(6,6))
     ax.set_facecolor('lightgray')
