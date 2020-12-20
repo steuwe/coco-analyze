@@ -215,6 +215,7 @@ class COCOanalyze:
             for did in localization_matches_dts:
                 # get the info on the [dt,gt] match
                 # load the detection and ground truth annotations
+                print(localization_matches_dts[did]
                 dtm        = localization_matches_dts[did][0]
                 image_id   = dtm['image_id']
 
