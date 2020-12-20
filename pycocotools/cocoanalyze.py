@@ -474,13 +474,14 @@ class COCOanalyze:
         variances = (self.params.sigmas * 2)**2
         for imgId in self.params.imgIds:
             B = []; D = []; available = set()
-            for d in self.cocoEval._dts[imgId, self.params.catIds[0]]:
-                dt = {}; dt['keypoints'] = d['keypoints']
-                dt['max_oks']   = max_oks[d['id']]
-                dt['opt_score'] = max_oks[d['id']]
-                _soft_nms_dts[d['id']] = dt
-                B.append(dt)
-            if len(B) == 0: continue
+            for cat in range(len(self.params.catIds)):
+                for d in self.cocoEval._dts[imgId, self.params.catIds[cat]]:
+                    dt = {}; dt['keypoints'] = d['keypoints']
+                    dt['max_oks']   = max_oks[d['id']]
+                    dt['opt_score'] = max_oks[d['id']]
+                    _soft_nms_dts[d['id']] = dt
+                    B.append(dt)
+                if len(B) == 0: continue
 
             while len(B) > 0:
                 B.sort(key=lambda k: -k['opt_score'])
