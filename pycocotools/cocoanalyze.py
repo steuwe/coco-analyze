@@ -459,10 +459,10 @@ class COCOanalyze:
             # assert(len(max_oks) == len(self._dts))
             
             print("EVALSIMGSAREA:")
-            print(evalImgsArea[1])
+            print(evalImgsArea[1:5])
             
             print("************")
-            print(max_oks[1])
+            print(max_oks)
 
             # do soft non max suppression
             _soft_nms_dts = self._soft_nms(max_oks)
