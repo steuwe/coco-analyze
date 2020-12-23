@@ -215,7 +215,6 @@ class COCOanalyze:
             for did in localization_matches_dts:
                 # get the info on the [dt,gt] match
                 # load the detection and ground truth annotations
-                print(localization_matches_dts[did])
                 dtm        = localization_matches_dts[did][0]
                 image_id   = dtm['image_id']
 
@@ -458,6 +457,10 @@ class COCOanalyze:
                     max_oks[i] = j
             # if assertion fails not all the detections have been evaluated
             # assert(len(max_oks) == len(self._dts))
+            
+            print(evalImgsArea)
+            print(************)
+            print(max_oks)
 
             # do soft non max suppression
             _soft_nms_dts = self._soft_nms(max_oks)
