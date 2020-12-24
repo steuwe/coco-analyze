@@ -459,7 +459,7 @@ class COCOanalyze:
             # assert(len(max_oks) == len(self._dts))
             print("length max_oks: ")
             print(len(max_oks))
-            print("length evalImgsArea: )
+            print("length evalImgsArea: ")
             print(len(evalImgsArea))
 
             # do soft non max suppression
