@@ -457,6 +457,9 @@ class COCOanalyze:
                     max_oks[i] = j
             # if assertion fails not all the detections have been evaluated
             # assert(len(max_oks) == len(self._dts))
+            print("******")
+            print(len(max_oks))
+            print(len(self._dts))
 
             # do soft non max suppression
             _soft_nms_dts = self._soft_nms(max_oks)
