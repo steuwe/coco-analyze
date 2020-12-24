@@ -462,7 +462,7 @@ class COCOanalyze:
             for e in self._dts:
                 imid = e['image_id']
                 found = False
-                for x in evalImgsArea:
+                for x in [e for e in filter(None,evalImgs)]:
                     if imid == x['image_id']:
                         found = True
                 if not found:
