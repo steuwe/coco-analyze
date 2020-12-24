@@ -126,9 +126,9 @@ def localizationErrors( coco_analyze, imgs_info, saveDir ):
     f.write(" - Inversion: %s\n"%inv_keypoints)
     f.write(" - Swap:      %s\n"%swap_keypoints)
     f.write(" - Miss:      %s\n"%miss_keypoints)
-
+    
     KEYPOINTS_L = ['Eyes','Throat','Nose', 'Withers', 'Ears', 'Tail', 'Front_elbows','Back_elbows','Front_knees', 'Back_knees', 'Front_paws', 'Back_paws']
-    KEYPOINTS_I = [[0, 1], [2],[3],[4],[5,6],[7,8],[9],[10,11],[12,13],[14,15],[16,17],[18,19]]
+    KEYPOINTS_I = [[0, 1], [2],[3],[4],[5,6],[7],[8,9],[10,11],[12,13],[14,15],[16,17],[18,19]]
 
     ####################################
     err_vecs = [jitt_keypoints,inv_keypoints,swap_keypoints,miss_keypoints]
