@@ -446,9 +446,11 @@ class COCOanalyze:
             self.cocoEval.evaluate(check_scores=True)
             evalImgs = [e for e in filter(None,self.cocoEval.evalImgs)]
 
+        print("*********")
         for aind, areaRngLbl in enumerate(self.params.areaRngLbl):
             evalImgsArea = [e for e in filter(None,evalImgs) if
                             e['aRng']==self.params.areaRng[aind]]
+            print(len(evalImgsArea))
             max_oks = {};
             for e in evalImgsArea:
                 dtIds       = e['dtIds']
@@ -457,7 +459,6 @@ class COCOanalyze:
                     max_oks[i] = j
             # if assertion fails not all the detections have been evaluated
             # assert(len(max_oks) == len(self._dts))
-            print(self.params.areaRng)
 
             # do soft non max suppression
             _soft_nms_dts = self._soft_nms(max_oks)
