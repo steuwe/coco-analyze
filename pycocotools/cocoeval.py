@@ -147,10 +147,6 @@ class COCOeval:
             p.catIds = list(np.unique(p.catIds))
         p.maxDets = sorted(p.maxDets)
         self.params=p
-
-        print("evaluate:")
-        print(p.useCats)
-        print(p.catIds)
         
         self._prepare()
         # loop through images, area range, max detection number
@@ -254,9 +250,6 @@ class COCOeval:
         :return: dict (single image results)
         '''
         p = self.params
-        print("evaluateImg:")
-        print(p.useCats)
-        print(p.catIds)
         if p.useCats:
             gt = self._gts[imgId,catId]
             dt = self._dts[imgId,catId]
@@ -626,7 +619,7 @@ class Params:
         # np.arange causes trouble.  the data point on arange is slightly larger than the true value
         self.iouThrs = np.linspace(.5, 0.95, int (np.round((0.95 - .5) / .05)) + 1, endpoint=True)
         self.recThrs = np.linspace(.0, 1.00, int (np.round((1.00 - .0) / .01)) + 1, endpoint=True)
-        self.maxDets = [100]
+        self.maxDets = [20]
         self.areaRng = [[0 ** 2, 1e5 ** 2], [32 ** 2, 96 ** 2], [96 ** 2, 1e5 ** 2]]
         self.areaRngLbl = ['all', 'medium', 'large']
         self.useCats = 1
