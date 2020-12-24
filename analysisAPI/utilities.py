@@ -38,7 +38,7 @@ def show_dets(coco_dts, coco_gts, img_info, save_path=None):
         c = (np.random.random((1, 3))*0.6+0.4).tolist()[0]
         if 'keypoints' in ann and type(ann['keypoints']) == list:
             # turn skeleton into zero-based index
-            sks = np.array(skeleton)-1
+            sks = np.array(skeleton)
             kp = np.array(ann['keypoints'])
             x = kp[0::3]; y = kp[1::3]; v = kp[2::3]
             for sk in sks:
