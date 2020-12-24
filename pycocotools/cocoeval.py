@@ -148,6 +148,10 @@ class COCOeval:
         p.maxDets = sorted(p.maxDets)
         self.params=p
 
+        print("evaluate:")
+        print(p.useCats)
+        print(p.catIds)
+        
         self._prepare()
         # loop through images, area range, max detection number
         catIds = p.catIds if p.useCats else [-1]
@@ -250,6 +254,9 @@ class COCOeval:
         :return: dict (single image results)
         '''
         p = self.params
+        print("evaluateImg:")
+        print(p.useCats)
+        print(p.catIds)
         if p.useCats:
             gt = self._gts[imgId,catId]
             dt = self._dts[imgId,catId]
