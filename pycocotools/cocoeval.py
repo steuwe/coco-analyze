@@ -169,7 +169,7 @@ class COCOeval:
              ]
         print("cocoeval***")
         print(len(self._dts))
-        print(self._tds[0:5])
+        print(self._dts[0:5])
         
         self._paramsEval = copy.deepcopy(self.params)
         toc = time.time()
