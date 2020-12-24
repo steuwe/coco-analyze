@@ -446,11 +446,9 @@ class COCOanalyze:
             self.cocoEval.evaluate(check_scores=True)
             evalImgs = [e for e in filter(None,self.cocoEval.evalImgs)]
 
-        print("*********")
         for aind, areaRngLbl in enumerate(self.params.areaRngLbl):
             evalImgsArea = [e for e in filter(None,evalImgs) if
                             e['aRng']==self.params.areaRng[aind]]
-            print(len(evalImgsArea))
             max_oks = {};
             for e in evalImgsArea:
                 dtIds       = e['dtIds']
