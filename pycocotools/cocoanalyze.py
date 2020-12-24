@@ -459,7 +459,7 @@ class COCOanalyze:
             # assert(len(max_oks) == len(self._dts))
             
             print("EVALSIMGSAREA:")
-            for e in self_dts:
+            for e in self._dts:
                 imid = e['image_id']
                 found = False
                 for x in evalImgsArea:
