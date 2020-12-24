@@ -949,7 +949,7 @@ class Params:
         self.oksLocThrs = .1
         # oks thresholds that define a jitter error
         self.jitterKsThrs = [.5,.85]
-        self.maxDets      = [100]
+        self.maxDets      = [20]
         self.teamMaxDets  = []
         self.areaRng      = [[32 ** 2, 1e5 ** 2],[32 ** 2, 96 ** 2],[96 ** 2, 1e5 ** 2]]
         self.areaRngLbl   = ['all','medium','large']
