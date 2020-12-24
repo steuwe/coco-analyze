@@ -167,10 +167,6 @@ class COCOeval:
                  for areaRng in p.areaRng
                  for imgId in p.imgIds
              ]
-        print("cocoeval***")
-        print(len(self._dts))
-        for e in self._dts:
-            print(e)
         
         self._paramsEval = copy.deepcopy(self.params)
         toc = time.time()
