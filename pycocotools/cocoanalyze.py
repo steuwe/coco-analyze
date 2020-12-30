@@ -947,7 +947,7 @@ class Params:
              "front_right_paw", "front_left_paw", "back_right_paw", "back_left_paw"]
         self.num_kpts = len(self.kpts_name)
         self.inv_idx  = [self.inv_kpts_name.index(self.kpts_name[i]) for i in range(self.num_kpts)]
-        self.sigmas = np.array([.025, .025, .1, .1, .08, .08, .1, .1, .1, .1, .1, .075, .075, .075, .075, .06, .06, .06, .06, .06])
+        self.sigmas = np.array([.04, .04, .1, .1, .1, .08, .1, .12, .1, .1, .1, .075, .075, .075, .075, .06, .06, .06, .06, .06])
         self.oksThrs  = np.array([.5 ,.55, .6, .65, .7, .75, .8, .85, .9, .95])
 
         # the threshold that determines the limit for localization error
