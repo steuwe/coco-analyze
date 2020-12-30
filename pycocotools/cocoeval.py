@@ -105,6 +105,7 @@ class COCOeval:
         
         mydts = self.cocoDt.loadAnns(self.cocoDt.getAnnIds())
         print(len(mydts))
+        print(mydts[:2])
 
         # convert ground truth to mask if iouType == 'segm'
         if p.iouType == 'segm':
