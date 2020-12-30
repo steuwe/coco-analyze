@@ -105,8 +105,16 @@ class COCOeval:
         
         mydts = self.cocoDt.loadAnns(self.cocoDt.getAnnIds())
         print(len(mydts))
-        print(mydts[:2])
-
+        print(mydts[0])
+        print(dts[0])
+        mybool = False
+        for e in mydts:
+            for a in dts:
+                if e['image_id'] == a['image_id']:
+                    mybool = True
+                    break
+                if mybool == False:
+                    print(e['image_id'])
         # convert ground truth to mask if iouType == 'segm'
         if p.iouType == 'segm':
             _toMask(gts, self.cocoGt)
