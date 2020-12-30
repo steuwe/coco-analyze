@@ -47,8 +47,6 @@ class COCOanalyze:
         self.params        = Params(iouType=iouType)
         self.params.imgIds = sorted(cocoGt.getImgIds())
         self.params.catIds = sorted(cocoGt.getCatIds())
-        self._gts=self.cocoGt.loadAnns(self.cocoGt.getAnnIds(imgIds=self.params.imgIds, catIds=self.params.catIds))
-        self._dts=self.cocoDt.loadAnns(self.cocoDt.getAnnIds(imgIds=self.params.imgIds, catIds=self.params.catIds))
         # get the max number of detections each team has per image
         self.cocoEval._prepare()
         self.params.teamMaxDets = [max([len(self.cocoEval._dts[k]) for k in self.cocoEval._dts.keys()])]
