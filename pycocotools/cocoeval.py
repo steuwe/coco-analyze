@@ -284,6 +284,9 @@ class COCOeval:
         T = len(p.iouThrs)
         G = len(gt)
         D = len(dt)
+        
+        print("length of dt in eval:")
+        print(D)
         gtm  = np.zeros((T,G))
         dtm  = np.zeros((T,D))
         gtIous = np.zeros((T,G))
