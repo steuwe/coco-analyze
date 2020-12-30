@@ -29,8 +29,10 @@ class COCOanalyze:
         self.cocoEval = COCOeval(cocoGt,cocoDt,iouType)
         # gt for analysis
         self._gts = cocoGt.loadAnns(cocoGt.getAnnIds())
+        self._gts=self.cocoGt.loadAnns(self.cocoGt.getAnnIds(imgIds=p.imgIds, catIds=p.catIds))
         # dt for analysis
         self._dts = cocoDt.loadAnns(cocoDt.getAnnIds())
+        self._dts=self.cocoDt.loadAnns(self.cocoDt.getAnnIds(imgIds=p.imgIds, catIds=p.catIds))
         # store the original detections without any modification
         self._original_dts = {d['id']:d for d in copy.deepcopy(self._dts)}
         # dt with corrections
@@ -457,6 +459,9 @@ class COCOanalyze:
             # if assertion fails not all the detections have been evaluated
             # assert(len(max_oks) == len(self._dts))
 
+            print("***")
+            print(len(max_oks))
+            print(len(self._dts))
             # do soft non max suppression
             _soft_nms_dts = self._soft_nms(max_oks)
             for cdt in self.corrected_dts[areaRngLbl]:
