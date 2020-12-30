@@ -29,10 +29,8 @@ class COCOanalyze:
         self.cocoEval = COCOeval(cocoGt,cocoDt,iouType)
         # gt for analysis
         self._gts = cocoGt.loadAnns(cocoGt.getAnnIds())
-        self._gts=self.cocoGt.loadAnns(self.cocoGt.getAnnIds(imgIds=p.imgIds, catIds=p.catIds))
         # dt for analysis
         self._dts = cocoDt.loadAnns(cocoDt.getAnnIds())
-        self._dts=self.cocoDt.loadAnns(self.cocoDt.getAnnIds(imgIds=p.imgIds, catIds=p.catIds))
         # store the original detections without any modification
         self._original_dts = {d['id']:d for d in copy.deepcopy(self._dts)}
         # dt with corrections
@@ -49,6 +47,8 @@ class COCOanalyze:
         self.params        = Params(iouType=iouType)
         self.params.imgIds = sorted(cocoGt.getImgIds())
         self.params.catIds = sorted(cocoGt.getCatIds())
+        self._gts=self.cocoGt.loadAnns(self.cocoGt.getAnnIds(imgIds=self.params.imgIds, catIds=self.params.catIds))
+        self._dts=self.cocoDt.loadAnns(self.cocoDt.getAnnIds(imgIds=self.params.imgIds, catIds=self.params.catIds))
         # get the max number of detections each team has per image
         self.cocoEval._prepare()
         self.params.teamMaxDets = [max([len(self.cocoEval._dts[k]) for k in self.cocoEval._dts.keys()])]
