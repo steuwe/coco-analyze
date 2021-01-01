@@ -210,8 +210,6 @@ class COCOanalyze:
 
         for aind, areaRngLbl in enumerate(areaRngLbls):
             localization_matches_dts = self.localization_matches[areaRngLbl, str(oksLocThrs), 'dts']
-            print("localization matches:")
-            print(localization_matches_dts)
             corrected_dts[areaRngLbl] = []
             # this contains all the detections that have been matched with a gt
             for did in localization_matches_dts:
@@ -328,10 +326,6 @@ class COCOanalyze:
                 # good keypoints are those that have oks max > 0.85 and argmax 0
                 good_kpts = np.logical_and.reduce((oks_max > self.params.jitterKsThrs[1],
                                                    oks_argmax == 0, gt_kpt_v != 0))*1
-                print("good kpts:")
-                print(good_kpts)
-                print("oks_max:")
-                print(oks_max)
                 # jitter keypoints have  0.5 <= oksm < 0.85 and oks_argmax == 0
                 jitt_kpts = np.logical_and.reduce((oks_max >= self.params.jitterKsThrs[0],
                                                    oks_max <  self.params.jitterKsThrs[1], oks_argmax == 0))
@@ -462,9 +456,6 @@ class COCOanalyze:
             # if assertion fails not all the detections have been evaluated
             # assert(len(max_oks) == len(self._dts))
 
-            print("***")
-            print(len(max_oks))
-            print(len(self._dts))
             # do soft non max suppression
             _soft_nms_dts = self._soft_nms(max_oks)
             for cdt in self.corrected_dts[areaRngLbl]:
