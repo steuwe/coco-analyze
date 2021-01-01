@@ -326,7 +326,10 @@ class COCOanalyze:
                 # good keypoints are those that have oks max > 0.85 and argmax 0
                 good_kpts = np.logical_and.reduce((oks_max > self.params.jitterKsThrs[1],
                                                    oks_argmax == 0, gt_kpt_v != 0))*1
-
+                print("good kpts:")
+                print(good_kpts)
+                print("oks_max:")
+                print(oks_max)
                 # jitter keypoints have  0.5 <= oksm < 0.85 and oks_argmax == 0
                 jitt_kpts = np.logical_and.reduce((oks_max >= self.params.jitterKsThrs[0],
                                                    oks_max <  self.params.jitterKsThrs[1], oks_argmax == 0))
