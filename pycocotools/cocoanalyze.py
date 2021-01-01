@@ -210,6 +210,8 @@ class COCOanalyze:
 
         for aind, areaRngLbl in enumerate(areaRngLbls):
             localization_matches_dts = self.localization_matches[areaRngLbl, str(oksLocThrs), 'dts']
+            print("localization matches:")
+            print(localization_matches_dts)
             corrected_dts[areaRngLbl] = []
             # this contains all the detections that have been matched with a gt
             for did in localization_matches_dts:
