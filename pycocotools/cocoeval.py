@@ -214,7 +214,7 @@ class COCOeval:
         if len(gts) == 0 or len(dts) == 0:
             return []
         ious = np.zeros((len(dts), len(gts)))
-        sigmas = np.array([.04, .04, .1, .1, .1, .08, .1, .12, .1, .1, .1, .075, .075, .075, .075, .06, .06, .06, .06, .06])
+        sigmas = np.array([.028, .028,  .07, .07,.07,.07, .07, .084,.07,  .07,  .07,  .07,  .052, .052, .052, .052, .042,  .042,  .042,  .042])
         vars = (sigmas * 2)**2
         k = len(sigmas)
 
