@@ -139,7 +139,11 @@ def localizationErrors( coco_analyze, imgs_info, saveDir ):
             tot_errs = 0
             for l in i:
                 tot_errs += err_vecs[j][l]
-            ERRORS.append(tot_errs/float(sum(err_vecs[j])))
+            v_err = tot_errs/float(sum(err_vecs[j]))
+            if np.isnan(v_err):
+                ERRORS.append(0)
+            else:
+                ERRORS.append(v_err)
 
         for lind, l in enumerate(KEYPOINTS_L):
             label_str = '{:7s}: {:2.1f}'.format(l,100*ERRORS[lind])
